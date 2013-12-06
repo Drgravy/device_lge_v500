@@ -3,7 +3,7 @@ USE_CAMERA_STUB := true
 # inherit from the proprietary version
 -include vendor/lge/awifi/BoardConfigVendor.mk
 
-TARGET_SPECIFIC_HEADER_PATH := device/lge/awifi/include
+TARGET_SPECIFIC_HEADER_PATH := device/lge/v500/include
 
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
@@ -38,7 +38,7 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x105c0000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-TARGET_PREBUILT_KERNEL := device/lge/awifi/kernel
+TARGET_PREBUILT_KERNEL := device/lge/v500/kernel
 
 # Try to build the kernel
 #TARGET_KERNEL_SOURCE := kernel/lge/awifi
@@ -91,7 +91,7 @@ TARGET_DISPLAY_USE_RETIRE_FENCE := true
 COMMON_GLOBAL_CFLAGS += -DLG_CAMERA_HARDWARE
 
 BOARD_SEPOLICY_DIRS += \
-        device/lge/awifi/sepolicy
+        device/lge/v500/sepolicy
 
 BOARD_SEPOLICY_UNION += \
 	file_contexts \
@@ -125,8 +125,8 @@ BOARD_SEPOLICY_UNION += \
 
 TARGET_OTA_ASSERT_DEVICE := awifi
 
-TARGET_RELEASETOOLS_EXTENSIONS := device/lge/awifi/loki
+TARGET_RELEASETOOLS_EXTENSIONS := device/lge/v500/loki
 
 COMMON_GLOBAL_CFLAGS += -DBOARD_CHARGING_CMDLINE_NAME='"androidboot.mode"' -DBOARD_CHARGING_CMDLINE_VALUE='"chargerlogo"'
 
-BOARD_HARDWARE_CLASS := device/lge/awifi/cmhw/
+BOARD_HARDWARE_CLASS := device/lge/v500/cmhw/
