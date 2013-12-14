@@ -32,38 +32,34 @@ PRODUCT_PACKAGES += \
         VisualizationWallpapers \
         librs_jni
 
-#Ramdisk Files
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/rootdir/init.awifi.usb.rc:root/init.awifi.usb.rc \
-	$(LOCAL_PATH)/rootdir/init.awifi.rc:root/init.awifi.rc \
-	$(LOCAL_PATH)/rootdir/fstab.gvar:root/fstab.awifi \
-	$(LOCAL_PATH)/rootdir/ueventd.awifi.rc:root/ueventd.awifi.rc
-
-#Files needed for WIFI
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/rootdir/system/vendor/firmware/wlan/prima/WCNSS_cfg.dat:system/vendor/firmware/wlan/prima/WCNSS_cfg.dat \
-        $(LOCAL_PATH)/rootdir/system/etc/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
-        $(LOCAL_PATH)/rootdir/system/etc/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/wifi/WCNSS_qcom_wlan_nv.bin \
-        $(LOCAL_PATH)/rootdir/system/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-        $(LOCAL_PATH)/rootdir/system/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+        $(LOCAL_PATH)/init.awifi.usb.rc:root/init.awifi.usb.rc \
+	$(LOCAL_PATH)/init.awifi.rc:root/init.awifi.rc \
+	$(LOCAL_PATH)/fstab.gvar:root/fstab.awifi \
+	$(LOCAL_PATH)/ueventd.awifi.rc:root/ueventd.awifi.rc
 
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/rootdir/system/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
-	$(LOCAL_PATH)/rootdir/system/etc/thermald.conf:system/etc/thermald.conf \
-	$(LOCAL_PATH)/rootdir/system/etc/vold.fstab:system/etc/vold.fstab
+        $(LOCAL_PATH)/WCNSS_cfg.dat:system/vendor/firmware/wlan/prima/WCNSS_cfg.dat \
+        $(LOCAL_PATH)/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+        $(LOCAL_PATH)/WCNSS_qcom_cfg.ini:system/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
+        $(LOCAL_PATH)/WCNSS_qcom_wlan_nv.bin:system/etc/wifi/WCNSS_qcom_wlan_nv.bin
 
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-	$(LOCAL_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
-        $(LOCAL_PATH)/rootdir/system/etc/mixer_paths.xml:system/etc/mixer_paths.xml \
-	$(LOCAL_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml 
+	$(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 
-# Prebuilt kl and kcm keymaps and Touch Screen Calibration
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/rootdir/system/usr/keylayout/hs_detect.kl:system/usr/keylayout/hs_detect.kl \
-	$(LOCAL_PATH)/rootdir/system/usr/keylayout/pmic8xxx_pwrkey.kl:system/usr/keylayout/pmic8xxx_pwrkey.kl \
-	$(LOCAL_PATH)/rootdir/system/usr/keylayout/awifi-keypad-8064.kl:system/usr/keylayout/awifi-keypad-8064.kl \
-	$(LOCAL_PATH)/rootdir/system/usr/idc/touch_mxt1188S.idc:system/usr/idc/touch_mxt1188S.idc
+	$(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml \
+	$(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml
+
+# Prebuilt kl and kcm keymaps
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/hs_detect.kl:system/usr/keylayout/hs_detect.kl \
+	$(LOCAL_PATH)/pmic8xxx_pwrkey.kl:system/usr/keylayout/pmic8xxx_pwrkey.kl \
+	$(LOCAL_PATH)/awifi-keypad-8064.kl:system/usr/keylayout/awifi-keypad-8064.kl
+
+# Prebuilt input device calibration files
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/touch_mxt1188S.idc:system/usr/idc/touch_mxt1188S.idc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -85,17 +81,14 @@ PRODUCT_COPY_FILES += \
 
 # GPS configuration
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/rootdir/system/etc/gps.conf:system/etc/gps.conf \
-	$(LOCAL_PATH)/rootdir/system/etc/sap.conf:system/etc/sap.conf
+	$(LOCAL_PATH)/gps.conf:system/etc/gps.conf \
+	$(LOCAL_PATH)/sap.conf:system/etc/sap.conf
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.opengles.version=196608
 
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.sf.lcd_density=320
-
 # Audio Configuration
-# Remove persist.audio.handset.mic and persist.audio.fluence.mode
+# FIXME: Remove persist.audio.handset.mic and persist.audio.fluence.mode
 #        while switching new audio HAL from legacy HAL
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.audio.handset.mic=digital \
@@ -116,7 +109,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	e2fsck
 
-#MSM QCOM Graphics
 PRODUCT_PACKAGES += \
 	libgenlock \
 	liboverlay \
@@ -125,7 +117,6 @@ PRODUCT_PACKAGES += \
 	copybit.msm8960 \
 	memtrack.msm8960
 
-#Audio Packages
 PRODUCT_PACKAGES += \
 	audio_policy.msm8960 \
 	audio.primary.msm8960 \
@@ -134,9 +125,8 @@ PRODUCT_PACKAGES += \
 	audio.r_submix.default \
 	libaudio-resampler
 
-#MSM QCOM Video
 PRODUCT_PACKAGES += \
-    libmm-omxcore \
+        libmm-omxcore \
 	libdivxdrmdecrypt \
 	libOmxVdec \
 	libOmxVenc \
@@ -144,18 +134,15 @@ PRODUCT_PACKAGES += \
 	libstagefrighthw \
 	libc2dcolorconvert
 
-#MSM QCOM Lights
-PRODUCT_PACKAGES += \
-	lights.msm8960
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+	rild.libpath=/system/lib/libril-qc-qmi-1.so
 
-#MSM Networking
+PRODUCT_PROPERTY_OVERRIDES += \
+	drm.service.enabled=true
+
 PRODUCT_PROPERTY_OVERRIDES += \
 	wifi.interface=wlan0 \
 	wifi.supplicant_scan_interval=15
-
-#DRM
-PRODUCT_PROPERTY_OVERRIDES += \
-	drm.service.enabled=true
 
 # Enable AAC 5.1 output
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -172,28 +159,37 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp
 
 PRODUCT_PACKAGES += \
+	lights.msm8960
+
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/mixer_paths.xml:system/etc/mixer_paths.xml
+
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/thermald.conf:system/etc/thermald.conf
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.sf.lcd_density=320
+
+PRODUCT_PACKAGES += \
 	conn_init \
 	hwaddrs
+
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/init.qcom.bt.sh:system/etc/init.qcom.bt.sh
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.bt.bdaddr_path=/data/misc/bdaddr
 
-# LOKI Bootloader Workaround
+# This hw ships locked, work around it with loki
 PRODUCT_PACKAGES += \
 	loki.sh \
 	loki_patch \
 	loki_flash
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	rild.libpath=/system/lib/libril-qc-qmi-1.so
-
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.radio.noril=true \
 	ro.carrier=wifi-only
 
-# Bluetooth
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qualcomm.bt.hci_transport=smd
 
 $(call inherit-product, hardware/qcom/msm8960/msm8960.mk)
 

@@ -39,9 +39,9 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
 
 # Try to build the kernel
 TARGET_KERNEL_SOURCE := kernel/lge/v500
-TARGET_KERNEL_CONFIG := cmb_v500_defconfig
-
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 user_debug=31 androidboot.selinux=permissive msm_rtb.filter=0x3F ehci-hcd.park=3 lpj=67677 androidboot.hardware=awifi vmalloc=600M
+#TARGET_PREBUILT_KERNEL := device/lge/v500/kernel
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 lpj=67677 androidboot.hardware=awifi vmalloc=600M
+TARGET_KERNEL_CONFIG := cyanogenmod_v500_defconfig
 
 
 BOARD_USES_ALSA_AUDIO:= true
@@ -60,6 +60,8 @@ BOARD_HOSTAPD_DRIVER := NL80211
 
 BOARD_EGL_CFG := device/lge/v500/egl.cfg
 
+#BOARD_USES_HGL := true
+#BOARD_USES_OVERLAY := true
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
 TARGET_USES_OVERLAY := true
@@ -93,25 +95,20 @@ BOARD_HAVE_LOW_LATENCY_AUDIO := true
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 
-#BOARD_USES_QCOM_HARDWARE := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK
-#TARGET_QCOM_DISPLAY_VARIANT := caf
-#TARGET_QCOM_MEDIA_VARIANT := caf
 USE_DEVICE_SPECIFIC_CAMERA := true
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
-#TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
-BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 
 TARGET_BOOTLOADER_BOARD_NAME := awifi
-TARGET_BOOTLOADER_NAME := v500
+TARGET_BOOTLOADER_NAME=v500
 
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/v500/bluetooth
 
-# wifi driver
+# FIXME: HOSTAPD-derived wifi driver
 BOARD_HAS_QCOM_WLAN := true
 BOARD_WLAN_DEVICE := qcwcn
 WIFI_DRIVER_FW_PATH_STA := "sta"
@@ -121,7 +118,7 @@ BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
-TARGET_RECOVERY_FSTAB := device/lge/v500/fstab.gvar
+TARGET_RECOVERY_FSTAB = device/lge/v500/fstab.gvar
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 
